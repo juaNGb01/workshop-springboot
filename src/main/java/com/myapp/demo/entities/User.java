@@ -1,10 +1,17 @@
 package com.myapp.demo.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_user") // cria tabela com respectivo nome
 public class User implements Serializable {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //id autoincrementavel
     private Long id;
     private String name;
     private String email;
