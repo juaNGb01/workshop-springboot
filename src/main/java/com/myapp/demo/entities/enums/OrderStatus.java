@@ -10,13 +10,15 @@ public enum OrderStatus {
     private int code;
 
     private OrderStatus (int code){
-        this.code =  code;
+        this.code = code;
     }
 
+    //retorna o codigo do enum
     public int getCode(){
         return code;
     }
 
+    //retorna o enum correspondente ao codigo
     public static OrderStatus valueOf(int code){
         for(OrderStatus value : OrderStatus.values() ){
             if(value.getCode() == code){
