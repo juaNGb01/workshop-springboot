@@ -8,7 +8,10 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -22,10 +25,17 @@ public class Order implements Serializable {
 
     private Integer orderStatus;
 
+    @OneToOne
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
 
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order(){}
 
@@ -53,11 +63,11 @@ public class Order implements Serializable {
         this.moment = moment;
     }
 
-    public User getUser() {
+    public User getClient() {
         return client;
     }
 
-    public void setUser(User client) {
+    public void setClient(User client) {
         this.client = client;
     }
 
@@ -69,6 +79,18 @@ public class Order implements Serializable {
         if(orderStatus != null ){
             this.orderStatus = orderStatus.getCode();
         }
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
