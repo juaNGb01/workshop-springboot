@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order_item")
@@ -61,6 +62,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -71,5 +73,11 @@ public class OrderItem implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+
+    public Double getSubTotal(){
+
+        return getPrice() * getQuantity();
     }
 }
