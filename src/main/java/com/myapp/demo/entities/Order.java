@@ -25,8 +25,7 @@ public class Order implements Serializable {
 
     private Integer orderStatus;
 
-    @OneToOne
-    @JoinColumn(name = "payment_id")
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
 
